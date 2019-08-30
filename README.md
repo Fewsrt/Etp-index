@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # README #
 
 Leap Bootstrap Theme by Medium Rare
@@ -28,3 +29,6 @@ To access support, find the support link in your Bootstrap Marketplace dashboard
 We strive to improve our products and we rely on feedback from our customers.
 
 Please feel free to share any feedback about Leap via twitter @mrareweb or feedback(at)mrare.co.
+=======
+# Etp-index
+>>>>>>> a7d374ce22a3235ac59e1e71847d645080a2b74a
