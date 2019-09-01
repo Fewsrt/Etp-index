@@ -6,3 +6,5 @@ Etp_ver1
 npm install
 
 npm start
+
+localhost:3000
