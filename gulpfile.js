@@ -323,7 +323,7 @@ gulp.task('serve', function (done) {
   browserSync({
     server: {
       baseDir: './dist',
-      index: "home-saas.html"
+      index: "index.html"
     }
   });
   done();
