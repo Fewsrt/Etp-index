@@ -6,8 +6,9 @@
   "description": "Software and SaaS Bootstrap Theme",
   "main": "gulpfile.js",
   "scripts": {
+    "dev": "./node_modules/.bin/gulp",
     "start": "./node_modules/.bin/gulp",
-    "postinstall": "gulp deps"
+    "postinstall": "gulp build"
   },
   "browserslist": "Safari > 10, Firefox > 40, Chrome > 40, ie >= 11",
   "eslintConfig": {
@@ -71,5 +72,9 @@
     "rollup-plugin-node-resolve": "~5.0.0",
     "rollup-plugin-uglify": "~6.0.1",
     "yamljs": "~0.3.0"
+  },
+  "engines": {
+    "node": "10.16.3",
+    "npm": "6.9.0"
   }
 }
