@@ -119,20 +119,20 @@ getPaths = () => {
       folder: 'assets/video',
       all: 'assets/video/*.*',
     },
-    dist: {
+    public: {
       packageFolder: '',
-      folder: 'dist',
-      pages: 'dist/pages',
-      all: 'dist/**/*',
-      assets: 'dist/assets',
-      img: 'dist/assets/img',
-      css: 'dist/assets/css',
-      scssSources: 'dist/scss',
-      js: 'dist/assets/js',
-      jsSources: 'dist/js',
-      fonts: 'dist/assets/fonts',
-      video: 'dist/assets/video',
-      documentation: 'dist/documentation',
+      folder: 'public',
+      pages: 'public/pages',
+      all: 'public/**/*',
+      assets: 'public/assets',
+      img: 'public/assets/img',
+      css: 'public/assets/css',
+      scssSources: 'public/scss',
+      js: 'public/assets/js',
+      jsSources: 'public/js',
+      fonts: 'public/assets/fonts',
+      video: 'public/assets/video',
+      documentation: 'public/documentation',
       exclude: ['!**/desktop.ini', '!**/.DS_store'],
     },
     copyDependencies: copyDeps,
@@ -143,20 +143,20 @@ let paths = getPaths();
 
 // DEFINE TASKS
 
-gulp.task('clean:dist', function (done) {
-  del.sync(paths.dist.all, {
+gulp.task('clean:public', function (done) {
+  del.sync(paths.public.all, {
     force: true
   });
   done();
 });
 
-// Copy html files to dist
+// Copy html files to public
 gulp.task('html', function () {
   return gulp.src(paths.pages.all, {
       base: paths.pages.folder
     })
-    .pipe(newer(paths.dist.folder))
-    .pipe(gulp.dest(paths.dist.folder))
+    .pipe(newer(paths.public.folder))
+    .pipe(gulp.dest(paths.public.folder))
     .pipe(reload({
       stream: true
     }));
@@ -170,7 +170,7 @@ gulp.task('sass', function () {
     }).on('error', sass.logError))
     .pipe(autoprefixer())
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(paths.dist.css))
+    .pipe(gulp.dest(paths.public.css))
     .pipe(browserSync.stream({
       match: "**/theme*.css"
     }));
@@ -190,7 +190,7 @@ gulp.task('sass-min', function () {
       suffix: '.min'
     }))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(paths.dist.css))
+    .pipe(gulp.dest(paths.public.css))
     .pipe(browserSync.stream({
       match: "**/theme*.css"
     }));
@@ -224,7 +224,7 @@ gulp.task('bootstrapjs', async (done) => {
   });
 
   await bundle.write({
-    file: path.resolve(__dirname, `./${paths.dist.js}${path.sep}${fileDest}`),
+    file: path.resolve(__dirname, `./${paths.public.js}${path.sep}${fileDest}`),
     banner,
     globals,
     format: 'umd',
@@ -276,13 +276,13 @@ gulp.task('mrarejs', async (done) => {
   });
 
   await bundle.write({
-    file: path.resolve(__dirname, `./${paths.dist.js}${path.sep}${fileDest}`),
+    file: path.resolve(__dirname, `./${paths.public.js}${path.sep}${fileDest}`),
     banner,
     globals,
     format: 'umd',
     name: 'theme',
     sourcemap: true,
-    sourcemapFile: path.resolve(__dirname, `./${paths.dist.js}${path.sep}${fileDest}.map`),
+    sourcemapFile: path.resolve(__dirname, `./${paths.public.js}${path.sep}${fileDest}.map`),
   });
   // Reload Browsersync clients
   reload();
@@ -294,8 +294,8 @@ gulp.task('copy-assets', function () {
   return gulp.src(paths.assets.all, {
       base: paths.assets.folder
     })
-    .pipe(newer(paths.dist.assets))
-    .pipe(gulp.dest(paths.dist.assets))
+    .pipe(newer(paths.public.assets))
+    .pipe(gulp.dest(paths.public.assets))
     .pipe(reload({
       stream: true
     }));
@@ -322,7 +322,7 @@ gulp.task('deps', async (done) => {
 gulp.task('serve', function (done) {
   browserSync({
     server: {
-      baseDir: './dist',
+      baseDir: './public',
       index: "index.html"
     }
   });
@@ -367,7 +367,7 @@ gulp.task('watch', function (done) {
   });
 
   assetsWatcher.on('unlink', function (path) {
-    const changedDistFile = path.resolve(paths.dist.assets, path.relative(path.resolve(paths.assets.folder), event.path));
+    const changedPublicFile = path.resolve(paths.public.assets, path.relative(path.resolve(paths.assets.folder), event.path));
     console.log('File ' + path + ' was removed');
     del.sync(path);
   });
@@ -377,6 +377,6 @@ gulp.task('watch', function (done) {
 
 });
 
-gulp.task('default', gulp.series('clean:dist', 'copy-assets', gulp.series('html', 'sass', 'sass-min', 'bootstrapjs', 'mrarejs'), gulp.series('serve', 'watch')));
+gulp.task('default', gulp.series('clean:public', 'copy-assets', gulp.series('html', 'sass', 'sass-min', 'bootstrapjs', 'mrarejs'), gulp.series('serve', 'watch')));
 
-gulp.task('build', gulp.series('clean:dist', 'copy-assets', gulp.series('html', 'sass', 'sass-min', 'bootstrapjs', 'mrarejs')));
+gulp.task('build', gulp.series('clean:public', 'copy-assets', gulp.series('html', 'sass', 'sass-min', 'bootstrapjs', 'mrarejs')));
