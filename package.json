@@ -6,8 +6,8 @@
   "description": "Software and SaaS Bootstrap Theme",
   "main": "gulpfile.js",
   "scripts": {
-    "dev": "./node_modules/.bin/gulp",
-    "start": "./node_modules/.bin/gulp",
+    "dev": "gulp",
+    "start": "gulp",
     "postinstall": "gulp build"
   },
   "browserslist": "Safari > 10, Firefox > 40, Chrome > 40, ie >= 11",
@@ -23,12 +23,14 @@
   "homepage": "http://leap.mediumra.re/index.html",
   "dependencies": {
     "@fancyapps/fancybox": "3.5.2",
+    "@google-cloud/storage": "^3.2.1",
     "@tanem/svg-injector": "~8.0.12",
     "aos": "~2.3.4",
     "autosize": "~4.0.2",
     "bootstrap": "~4.3.1",
     "clipboard": "~2.0.4",
     "countup.js": "~2.0.2",
+    "express": "^4.17.1",
     "flatpickr": "~4.6.1",
     "flickity": "~2.2.0",
     "inter-ui": "~3.7.0",
@@ -76,5 +78,12 @@
   "engines": {
     "node": "10.16.3",
     "npm": "6.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fewsrt/Etp-index.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Fewsrt/Etp-index/issues"
   }
 }
